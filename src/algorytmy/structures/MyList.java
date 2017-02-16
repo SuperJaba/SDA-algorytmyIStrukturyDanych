@@ -1,8 +1,6 @@
 package algorytmy.structures;
 
-import java.util.Arrays;
-
-public class MyList {
+public class MyList implements MyListInterface {
     private int[] array;
     private final int INITIAL_SIZE = 10;
     private int size;
@@ -14,9 +12,34 @@ public class MyList {
 
     }
 
+    public void add(MyList myList) {
+        for (int i = 0; i < myList.size; i++) {
+            this.add(myList.array[i]);
+        }
+    }
+
+    public void add(MyList myList, int index) {
+        for (int i = 0; i < myList.size; i++) {
+            add(index + i, myList.array[i]);
+        }
+    }
+
     public void put(int index, int value) {
         if (checkIndex(index)) {
             this.array[index] = value;
+        }
+    }
+
+
+    public void addAll(MyListInterface myList) {
+        for (int i = 0; i < myList.getSize(); i++) {
+            this.add(myList.get(i));
+        }
+    }
+
+    public void addAll(MyListInterface myList, int index) {
+        for (int i = 0; i < myList.getSize(); i++) {
+            add(index +i, myList.get(i));
         }
     }
 
@@ -50,7 +73,7 @@ public class MyList {
         }
     }
 
-    public MyList clone() {
+    public MyListInterface clone() {
         MyList myList = new MyList();
         myList.array = rewrite(new int[this.array.length]);
         myList.size = this.size;

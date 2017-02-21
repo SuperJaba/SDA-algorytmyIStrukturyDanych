@@ -18,11 +18,10 @@ public abstract class AbstarctQueque implements Queque {
 
 
     @Override
-    public int pop() {
+    public int pop() throws QueueException {
         AbstarctQueque nextValue = this.next;
         if (nextValue == null) {
-            System.out.println("Kolejka jest pusta");
-            return 0;
+            throw new QueueException("Kolejka jest pusta");
         }
         this.next = nextValue.next;
         nextValue.next = null;
